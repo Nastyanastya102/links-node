@@ -1,0 +1,36 @@
+{
+  "name": "node-first",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "lint": "eslint ./",
+    "lint.fix": "eslint ./ --fix",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "https://github.com/Nastyanastya102",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.10.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.7",
+    "nanoid": "^3.1.23"
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.2",
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0"
+  }
+}
