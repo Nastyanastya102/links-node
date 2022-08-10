@@ -5,14 +5,16 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
+    "start": "cross-env NODE_ENV=production node app.js",
     "server": "nodemon app.js",
     "lint": "eslint ./",
     "lint.fix": "eslint ./ --fix",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "cross-env NODE_ENV=develop concurrently \"npm run server\" \"npm run client\"",
+    "client:install": "npm install --prefix client",
+    "client:build": "npm run build --prefix client"
   },
-  "keywords": [],
+  "keywords": [] ,
   "author": "https://github.com/Nastyanastya102",
   "license": "ISC",
   "dependencies": {
@@ -26,6 +28,7 @@
   },
   "devDependencies": {
     "concurrently": "^6.0.2",
+    "cross-env": "^7.0.3",
     "eslint": "^7.25.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
