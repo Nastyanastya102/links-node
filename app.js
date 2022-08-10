@@ -14,6 +14,7 @@ process.on('uncaughtException', (err) => {
 app.use(express.json({ extend: true }))
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/link', require('./routes/links'))
+app.use('/t/', require('./routes/redirect'))
 
 const start = async () => {
   try {

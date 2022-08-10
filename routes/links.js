@@ -53,7 +53,8 @@ router.get('/:id', authMiddleware, async (req, res) => {
   try {
     const link = await Links.findById(req.params.id)
 
-    req.json(link)
+    console.log(link);
+    res.json(link)
   } catch (error) {
     res.status(500).json({ message: 'Something went wrong, please try again' })
   }

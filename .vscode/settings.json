@@ -37,5 +37,8 @@
     "workbench.sash.size": 1,
     "workbench.tree.indent": 2,
     "diffEditor.codeLens": true,
-    "diffEditor.wordWrap": "on"
+    "diffEditor.wordWrap": "on",
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
 }

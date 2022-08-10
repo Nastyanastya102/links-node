@@ -29,21 +29,23 @@ router.post(
 
       const { email, password } = req.body
 
+      // check if email was used
       const candidate = await User.findOne({ email })
 
       if (candidate) {
-        return res.status(400).json({ message: 'This user already exists' })
+        return res.status(400).json({ message: 'User with this email already exists' })
       }
-
+      // hash password
       const hashedPassword = await bcrypt.hash(password, 12)
       const user = new User({ email, password: hashedPassword })
+      // save a new user
 
       await user.save()
 
-      res.status(201).json({ message: 'User created' })
+      return res.status(201).json({ message: 'User created' })
 
     } catch (e) {
-      res.status(500).json({ message: 'Something went wrong, please try again' })
+      return res.status(500).json({ message: 'Something went wrong, please try again' })
     }
   },
 )
@@ -77,19 +79,21 @@ router.post(
       const isMatch = await bcrypt.compare(password, user.password)
 
       if (!isMatch) {
-        return res.status(400).json({ message: 'Invalid password, please try again' })
+        // Invalid password, please try again. Better do not show what was wrong
+        return res.status(400).json({ message: 'Invalid email or password, please try again' })
       }
 
       const token = jwt.sign(
         { userId: user.id },
         config.get('jwtSecret'),
+        // reconmended time of token life
         { expiresIn: '1h' },
       )
 
-      res.json({ token, userId: user.id })
+      return res.json({ token, userId: user.id })
 
     } catch (e) {
-      res.status(500).json({ message: 'Something went wrong, please try again' })
+      return res.status(500).json({ message: 'Something went wrong, please try again' })
     }
   },
 )
