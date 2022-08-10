@@ -1,6 +1,7 @@
 const express = require('express')
 const config = require('config')
 const mongoose = require('mongoose')
+const path = require('path')
 // speсial Object Data Modelling for working with mongoDB
 const app = express()
 // Future server
@@ -16,6 +17,13 @@ app.use('/api/auth', require('./routes/auth'))
 app.use('/api/link', require('./routes/links'))
 app.use('/t/', require('./routes/redirect'))
 
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'client', 'build')))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 const start = async () => {
   try {
     await mongoose.connect(config.get('mongoUri'), {
